@@ -1,0 +1,11 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "JarLib/local_policy.jar",
+        "JarLib/mina-core.jar",
+        "JarLib/mysql-connector-java-bin.jar",
+        "JarLib/slf4j-api.jar",
+        "JarLib/slf4j-jdk14.jar",
+        "JarLib/US_export_policy.jar"
+    ]
+}
