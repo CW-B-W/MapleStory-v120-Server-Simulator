@@ -1,18 +1,11 @@
 #!/bin/bash
 
-chown -R mysql:mysql /var/lib/mysql
-chmod -R a+rw /var/lib/mysql
-service mysql restart
-
-mysql -u root -e "use MapleStory" 1> /dev/null 2>& 1
+mysql -w -h 172.22.0.3 -u root -e "use MapleStory" 1> /dev/null 2>& 1
 if [ "$?" = "1" ]
 then
-    mysql -u root -e "create database MapleStory"
-    # mysql -u root MapleStory < /root/sql/maplestory.sql
-    mysql -u root MapleStory < /root/sql/tms.sql
-    service mysql restart
+    mysql -h 172.22.0.3 -u root -e "create database MapleStory"
+    # mysql -h 172.22.0.3 -u root MapleStory < /root/sql/maplestory.sql
+    mysql -h 172.22.0.3 -u root MapleStory < /MapleStory-v120-Server-Simulator/sql/tms.sql
 fi
 
-echo "OK"
-
-tail -f /dev/null # prevent container from exiting
+cd /MapleStory-v120-Server-Simulator && ./Launcher.sh

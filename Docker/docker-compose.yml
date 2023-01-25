@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  tms120:
+    image: tms120
+    container_name: ms_tms120
+    networks:
+      ms_network:
+        ipv4_address: 172.22.0.2
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:5.7-debian
+    container_name: ms_mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      MYSQL_USER: maplestory
+      MYSQL_PASSWORD: maplestory
+    networks:
+      ms_network:
+        ipv4_address: 172.22.0.3
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./mysql_conf:/etc/mysql/conf.d
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 2s
+      retries: 10
+
+networks:
+  ms_network:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 172.22.0.1/16
+         gateway: 172.22.0.1
