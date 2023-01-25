@@ -37,5 +37,7 @@ RUN service mysql restart && \
     sed -i 's/tms.Pass          = /tms.Pass          = maplestory/g' MapleStory-v120-Server-Simulator/Settings.ini
 
 
+VOLUME /var/lib/mysql
+
 ADD start_services.sh /root/start_services.sh
 CMD ["sh", "/root/start_services.sh"]

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+chown -R mysql:mysql /var/lib/mysql
+chmod -R a+rw /var/lib/mysql
 service mysql restart
 
 mysql -u root -e "use MapleStory" 1> /dev/null 2>& 1
