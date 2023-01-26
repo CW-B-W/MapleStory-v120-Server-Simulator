@@ -7,9 +7,15 @@ services:
     networks:
       ms_network:
         ipv4_address: 172.22.0.2
+    volumes:
+      - ./tms120_conf/Settings.ini:/MapleStory-v120-Server-Simulator/Settings.ini
     depends_on:
       mysql:
         condition: service_healthy
+    ports:
+        - 8484:8484
+        - 8586:8586
+        - 8596:8596
 
   mysql:
     image: mysql:5.7-debian

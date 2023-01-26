@@ -23,7 +23,5 @@ RUN cd /MapleStory-v120-Server-Simulator && \
     tar -xf wz.tar && \
     rm /MapleStory-v120-Server-Simulator/wz.tar
 
-RUN sed -i 's/localhost/172\.22\.0\.3/g' /MapleStory-v120-Server-Simulator/Settings.ini
-
 ADD start_services.sh /start_services.sh
 CMD ["sh", "/start_services.sh"]
