@@ -1,8 +1,10 @@
 FROM ubuntu:18.04
 MAINTAINER CW-B-W
 
-EXPOSE 8585
 EXPOSE 8484
+EXPOSE 8585
+EXPOSE 8586
+EXPOSE 8596
 
 RUN apt update && \
     apt install -y openjdk-8-jdk && \
