@@ -9,6 +9,7 @@ RUN apt update && \
     apt install -y maven && \
     apt install -y git && \
     apt install -y mysql-client && \
+    apt install -y wget && \
     rm -rf /var/lib/apt/lists/*
 
 RUN git clone --depth 1 https://github.com/CW-B-W/MapleStory-v120-Server-Simulator.git && \
@@ -17,8 +18,10 @@ RUN git clone --depth 1 https://github.com/CW-B-W/MapleStory-v120-Server-Simulat
     cp target/tms120-1.0.0.jar dist/TMS120.jar && \
     mvn clean
 
-ADD wz.tar /MapleStory-v120-Server-Simulator
-RUN rm /MapleStory-v120-Server-Simulator/wz.tar
+RUN cd /MapleStory-v120-Server-Simulator && \
+    wget https://github.com/CW-B-W/MapleStory-v120-Server-Simulator/raw/wz/wz.tar && \
+    tar -xf wz.tar && \
+    rm /MapleStory-v120-Server-Simulator/wz.tar
 
 RUN sed -i 's/localhost/172\.22\.0\.3/g' /MapleStory-v120-Server-Simulator/Settings.ini
 
